@@ -34,6 +34,7 @@ function OrderTrackingPage() {
   const [courier, setCourier] = useState<Pick<Courier, "user_id" | "license_plate" | "current_lat" | "current_lng"> | null>(null);
   const [loading, setLoading] = useState(true);
   const [acting, setActing] = useState(false);
+  const [showDelivered, setShowDelivered] = useState(false);
 
   const isCourier = roles.includes("courier");
   const requireRole = isCourier ? "courier" : "customer";
