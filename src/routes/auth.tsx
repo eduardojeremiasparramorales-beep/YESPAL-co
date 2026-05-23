@@ -17,8 +17,8 @@ export const Route = createFileRoute("/auth")({
   validateSearch: (s) => searchSchema.parse(s),
   head: () => ({
     meta: [
-      { title: "Entrar a MotoYa" },
-      { name: "description", content: "Inicia sesión o crea tu cuenta en MotoYa." },
+      { title: "Entrar a YESPAL" },
+      { name: "description", content: "Inicia sesión o crea tu cuenta en YESPAL." },
     ],
   }),
   component: AuthPage,
@@ -67,7 +67,7 @@ function AuthPage() {
       password,
       options: {
         emailRedirectTo: window.location.origin,
-        data: { full_name: name, phone, role: signupRole, city: "Bucaramanga" },
+        data: { full_name: name, phone, role: signupRole, city: "Acacías" },
       },
     });
     if (error) {
@@ -84,7 +84,7 @@ function AuthPage() {
       if (cErr) console.error(cErr);
     }
     setSubmitting(false);
-    toast.success("¡Cuenta creada! Bienvenido a MotoYa");
+    toast.success("¡Cuenta creada! Bienvenido a YESPAL");
   };
 
   const handleGoogle = async () => {

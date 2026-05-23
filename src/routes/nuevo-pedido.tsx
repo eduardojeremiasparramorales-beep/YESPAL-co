@@ -12,7 +12,7 @@ import { geocodeAddress, computeRouteDistance } from "@/lib/maps.functions";
 import { calculateFare, formatCop, type FareBreakdown } from "@/lib/fare";
 
 export const Route = createFileRoute("/nuevo-pedido")({
-  head: () => ({ meta: [{ title: "MotoYa · Nuevo pedido" }] }),
+  head: () => ({ meta: [{ title: "YESPAL · Nuevo pedido" }] }),
   component: NewOrderPage,
 });
 
@@ -59,10 +59,10 @@ function NewOrderPage() {
       if (pickup) {
         pickupPt = pickup;
       } else {
-        const p = await geocode({ data: { address: pickupRaw, city: "Bucaramanga" } });
+        const p = await geocode({ data: { address: pickupRaw, city: "Acacías" } });
         pickupPt = { lat: p.lat, lng: p.lng, address: p.formatted };
       }
-      const d = await geocode({ data: { address: dropoffRaw, city: "Bucaramanga" } });
+      const d = await geocode({ data: { address: dropoffRaw, city: "Acacías" } });
       const dropoffPt: Point = { lat: d.lat, lng: d.lng, address: d.formatted };
       const r = await route({ data: { origin: { lat: pickupPt.lat, lng: pickupPt.lng }, destination: { lat: dropoffPt.lat, lng: dropoffPt.lng } } });
       const f = calculateFare(r.distance_km);
@@ -84,7 +84,7 @@ function NewOrderPage() {
       .from("orders")
       .insert({
         customer_id: user.id,
-        city: "Bucaramanga",
+        city: "Acacías",
         pickup_address: pickup.address,
         pickup_lat: pickup.lat,
         pickup_lng: pickup.lng,

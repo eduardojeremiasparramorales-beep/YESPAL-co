@@ -19,7 +19,7 @@ export const geocodeAddress = createServerFn({ method: "POST" })
   .inputValidator((input) =>
     z.object({
       address: z.string().min(3).max(255),
-      city: z.string().min(2).max(80).default("Bucaramanga"),
+      city: z.string().min(2).max(80).default("Acacías"),
     }).parse(input),
   )
   .handler(async ({ data }) => {

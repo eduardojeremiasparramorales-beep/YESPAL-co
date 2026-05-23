@@ -1,6 +1,6 @@
 {
-  "name": "MotoYa — Domicilios al instante",
-  "short_name": "MotoYa",
+  "name": "YESPAL — Domicilios al instante",
+  "short_name": "YESPAL",
   "description": "Solicita domicilios en moto al instante en tu ciudad.",
   "start_url": "/",
   "display": "standalone",
