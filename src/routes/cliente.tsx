@@ -14,14 +14,34 @@ export const Route = createFileRoute("/cliente")({
   component: ClientePage,
 });
 
+const STATUS_LABEL: Record<string, string> = {
+  pending: "Buscando repartidor",
+  accepted: "Aceptado",
+  picked_up: "En camino",
+  delivered: "Entregado",
+  cancelled: "Cancelado",
+};
+
 function ClientePage() {
   const { user } = useAuth();
   const [orders, setOrders] = useState<Order[]>([]);
 
   useEffect(() => {
     if (!user) return;
-    supabase.from("orders").select("*").eq("customer_id", user.id).order("created_at", { ascending: false }).limit(10)
+    supabase.from("orders").select("*").eq("customer_id", user.id).order("created_at", { ascending: false }).limit(20)
       .then(({ data }) => setOrders((data as Order[]) ?? []));
+
+    const ch = supabase.channel(`client-orders-${user.id}`)
+      .on("postgres_changes", { event: "*", schema: "public", table: "orders", filter: `customer_id=eq.${user.id}` }, (payload) => {
+        if (payload.eventType === "INSERT") {
+          setOrders((prev) => [payload.new as Order, ...prev]);
+        } else if (payload.eventType === "UPDATE") {
+          const next = payload.new as Order;
+          setOrders((prev) => prev.map((o) => o.id === next.id ? next : o));
+        }
+      })
+      .subscribe();
+    return () => { supabase.removeChannel(ch); };
   }, [user]);
 
   const active = orders.find((o) => ["pending", "accepted", "picked_up"].includes(o.status));
@@ -68,7 +88,7 @@ function ClientePage() {
               <Link key={o.id} to="/pedido/$id" params={{ id: o.id }} className="block rounded-2xl border border-border bg-surface p-4 hover:border-primary/40 transition">
                 <div className="flex items-center justify-between">
                   <span className={`rounded-full px-2 py-0.5 text-xs font-bold ${o.status === "delivered" ? "bg-success/15 text-success" : o.status === "cancelled" ? "bg-destructive/15 text-destructive" : "bg-warning/15 text-warning"}`}>
-                    {o.status}
+                    {STATUS_LABEL[o.status] ?? o.status}
                   </span>
                   <span className="font-bold">{formatCop(o.fare_cop)}</span>
                 </div>
