@@ -21,7 +21,7 @@ interface CourierRow {
 }
 
 export const Route = createFileRoute("/repartidor")({
-  head: () => ({ meta: [{ title: "MotoYa · Repartidor" }] }),
+  head: () => ({ meta: [{ title: "YESPAL · Repartidor" }] }),
   component: CourierPage,
 });
 

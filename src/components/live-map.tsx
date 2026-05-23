@@ -26,11 +26,16 @@ export function LiveMap({ pickup, dropoff, courier, className }: Props) {
         disableDefaultUI: true,
         zoomControl: true,
         styles: [
-          { elementType: "geometry", stylers: [{ color: "#1d2538" }] },
-          { elementType: "labels.text.fill", stylers: [{ color: "#aab2c5" }] },
-          { elementType: "labels.text.stroke", stylers: [{ color: "#10131c" }] },
-          { featureType: "road", elementType: "geometry", stylers: [{ color: "#2b3550" }] },
-          { featureType: "water", elementType: "geometry", stylers: [{ color: "#0d1322" }] },
+          { elementType: "geometry", stylers: [{ color: "#1a1a1a" }] },
+          { elementType: "labels.text.fill", stylers: [{ color: "#9a9a9a" }] },
+          { elementType: "labels.text.stroke", stylers: [{ color: "#0a0a0a" }] },
+          { featureType: "road", elementType: "geometry", stylers: [{ color: "#2a2a2a" }] },
+          { featureType: "road.arterial", elementType: "geometry", stylers: [{ color: "#3a3a3a" }] },
+          { featureType: "road.highway", elementType: "geometry", stylers: [{ color: "#FFCC00" }, { lightness: -40 }] },
+          { featureType: "water", elementType: "geometry", stylers: [{ color: "#000000" }] },
+          { featureType: "poi", elementType: "geometry", stylers: [{ color: "#1f1f1f" }] },
+          { featureType: "poi.park", elementType: "geometry", stylers: [{ color: "#1a2a1a" }] },
+          { featureType: "transit", elementType: "geometry", stylers: [{ color: "#1f1f1f" }] },
         ],
       });
       mapRef.current = map;
@@ -45,10 +50,10 @@ export function LiveMap({ pickup, dropoff, courier, className }: Props) {
     markersRef.current = [];
 
     const items: Marker[] = [
-      { ...pickup, label: "A", color: "#f08a3e" },
-      { ...dropoff, label: "B", color: "#5ed4a1" },
+      { ...pickup, label: "A", color: "#FFCC00" },
+      { ...dropoff, label: "B", color: "#22c55e" },
     ];
-    if (courier) items.push({ ...courier, label: "🏍", color: "#3b82f6" });
+    if (courier) items.push({ ...courier, label: "🏍", color: "#ffffff" });
 
     const bounds = new window.google.maps.LatLngBounds();
     items.forEach((m) => {

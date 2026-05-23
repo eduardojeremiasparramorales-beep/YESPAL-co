@@ -7,8 +7,8 @@ import { useAuth, homeForRoles } from "@/hooks/use-auth";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "MotoYa — Domicilios al instante en moto" },
-      { name: "description", content: "Pide un domicilio y recíbelo en minutos. Cobertura en Bucaramanga, pagos en efectivo y pronto Nequi." },
+      { title: "YESPAL — Domicilios al instante en moto" },
+      { name: "description", content: "Pide un domicilio y recíbelo en minutos. Cobertura en Acacías, pagos en efectivo y pronto Nequi." },
     ],
   }),
   component: Landing,
@@ -25,12 +25,12 @@ function Landing() {
   }, [user, roles, loading, navigate]);
 
   return (
-    <div className="min-h-screen bg-gradient-surface">
+    <div className="min-h-screen bg-gradient-hero">
       <header className="mx-auto flex max-w-6xl items-center justify-between px-4 py-5">
         <BrandLogo />
         <Link
           to="/auth"
-          className="rounded-xl border border-border bg-surface/60 px-4 py-2 text-sm font-semibold backdrop-blur transition hover:bg-surface"
+          className="rounded-xl border border-border bg-surface/60 px-4 py-2 text-sm font-semibold backdrop-blur transition hover:bg-surface-elevated hover:border-primary/40"
         >
           Entrar
         </Link>
@@ -39,15 +39,15 @@ function Landing() {
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-8 md:pt-16">
         <section className="grid items-center gap-10 md:grid-cols-2">
           <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-              <Zap className="h-3.5 w-3.5" /> En vivo · Bucaramanga
+            <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary">
+              <Zap className="h-3.5 w-3.5" /> En vivo · Acacías, Meta
             </div>
-            <h1 className="mt-4 text-4xl font-black leading-[1.05] tracking-tight md:text-6xl">
-              Tu domicilio,<br />
-              <span className="text-gradient-primary">en minutos.</span>
+            <h1 className="mt-4 text-5xl font-black leading-[1.02] tracking-tight md:text-7xl">
+              Tu pedido,<br />
+              <span className="text-primary">en buenas manos.</span>
             </h1>
             <p className="mt-5 max-w-md text-lg text-muted-foreground">
-              Solicita un mensajero en moto y recíbelo donde quieras. Rápido, transparente y seguro.
+              Domicilios y mensajería en moto al instante. Rápido, confiable y siempre cerca de ti.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
@@ -114,7 +114,7 @@ function Landing() {
       </main>
 
       <footer className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} MotoYa · Hecho en Colombia
+        © {new Date().getFullYear()} YESPAL · Hecho en Colombia
       </footer>
     </div>
   );

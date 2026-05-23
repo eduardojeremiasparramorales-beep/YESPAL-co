@@ -1,4 +1,4 @@
-// MotoYa fare logic — single source of truth (client + server)
+// YESPAL fare logic — single source of truth (client + server)
 export const FARE_BASE_COP = 6000;
 export const FARE_PER_KM_COP = 1500;
 export const FARE_BASE_KM = 2;

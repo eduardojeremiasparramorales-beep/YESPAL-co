@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { formatCop } from "@/lib/fare";
 
 export const Route = createFileRoute("/repartidor/ganancias")({
-  head: () => ({ meta: [{ title: "MotoYa · Mis ganancias" }] }),
+  head: () => ({ meta: [{ title: "YESPAL · Mis ganancias" }] }),
   component: EarningsPage,
 });
 

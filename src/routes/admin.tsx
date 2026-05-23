@@ -12,7 +12,7 @@ import type { Database } from "@/integrations/supabase/types";
 type Order = Database["public"]["Tables"]["orders"]["Row"];
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "MotoYa · Administración" }] }),
+  head: () => ({ meta: [{ title: "YESPAL · Administración" }] }),
   component: AdminPage,
 });
 
