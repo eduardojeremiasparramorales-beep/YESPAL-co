@@ -14,7 +14,7 @@ type Order = Database["public"]["Tables"]["orders"]["Row"];
 type Courier = Database["public"]["Tables"]["couriers"]["Row"];
 
 export const Route = createFileRoute("/pedido/$id")({
-  head: () => ({ meta: [{ title: "MotoYa · Pedido" }] }),
+  head: () => ({ meta: [{ title: "YESPAL · Pedido" }] }),
   component: OrderTrackingPage,
 });
 

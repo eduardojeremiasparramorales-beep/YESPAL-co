@@ -4,8 +4,8 @@
   "description": "Solicita domicilios en moto al instante en tu ciudad.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#1a1f2e",
-  "theme_color": "#f08a3e",
+  "background_color": "#0a0a0a",
+  "theme_color": "#FFCC00",
   "orientation": "portrait",
   "icons": [
     {
