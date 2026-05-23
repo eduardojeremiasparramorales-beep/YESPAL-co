@@ -119,8 +119,15 @@ function OrderTrackingPage() {
     setActing(true);
     const { error } = await supabase.rpc("complete_order", { _order_id: id });
     setActing(false);
-    if (error) toast.error(error.message); else { toast.success("¡Pedido entregado!"); navigate({ to: "/repartidor" }); }
+    if (error) { toast.error(error.message); return; }
+    setShowDelivered(true);
+    setTimeout(() => navigate({ to: "/repartidor" }), 2200);
   };
+
+  // Show success overlay for customer too when status flips to delivered via realtime
+  useEffect(() => {
+    if (order?.status === "delivered" && !showDelivered) setShowDelivered(true);
+  }, [order?.status]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <AppShell requireRole={requireRole} title="Pedido"><div className="grid place-items-center py-20"><Loader2 className="h-6 w-6 animate-spin text-primary" /></div></AppShell>;
   if (!order) return <AppShell requireRole={requireRole} title="Pedido"><p>Pedido no encontrado.</p></AppShell>;
@@ -172,6 +179,20 @@ function OrderTrackingPage() {
           </Button>
         )}
       </div>
+
+      {showDelivered && (
+        <div className="fixed inset-0 z-50 grid place-items-center bg-background/90 backdrop-blur-md animate-in fade-in duration-300">
+          <div className="mx-4 max-w-sm rounded-3xl border border-success/40 bg-surface p-8 text-center shadow-glow animate-in zoom-in-95 duration-300">
+            <div className="mx-auto grid h-20 w-20 place-items-center rounded-full bg-success/15 ring-4 ring-success/30">
+              <CheckCircle2 className="h-12 w-12 text-success" />
+            </div>
+            <h2 className="mt-5 text-2xl font-black">¡Pedido entregado!</h2>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {isCourier ? "Ganancia registrada en tu balance." : "Gracias por usar YESPAL."}
+            </p>
+          </div>
+        </div>
+      )}
     </AppShell>
   );
 }
